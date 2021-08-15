@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./icons/feather.min.js"></script>
+    <link rel="stylesheet" href="./main.css">
+    <title>Web tutorials - responsive sidebar</title>
+</head>
+<body>
+    <div class="nav_wrapper"></div>
+    <div class="nav_mobile">
+        <i data-feather="menu" id="menu_icon"></i>
+    </div>
+    <div class="nav">
+        <div class="nav_header">
+            <span>Web tutorials</span>
+        </div>
+        <div class="nav_items">
+            <div class="nav_item">
+                <i data-feather="home" width="20"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav_item active_class">
+                <i data-feather="users" width="20"></i>
+                <span>Users</span>
+            </div>
+            <div class="nav_item">
+                <i data-feather="bar-chart-2" width="20"></i>
+                <span>Charts</span>
+            </div>
+            <div class="nav_item">
+                <i data-feather="book-open" width="20"></i>
+                <span>Books</span>
+            </div>
+        </div>
+        <div class="item_dropdown">
+            <div class="dropdown_btn">
+                <i data-feather="list"></i>
+                <span>Dropdown</span>
+                <i class="chevron-icon" data-feather="chevron-down" width="20"></i>
+            </div>
+            <div class="dropdown_items">
+                <div class="dropdown_item">
+                    Dropdown item 1
+                </div>
+                <div class="dropdown_item">
+                    Dropdown item 2
+                </div>
+                <div class="dropdown_item">
+                    Dropdown item 3
+                </div>
+            </div>
+        </div>
+        <div class="nav_footer">
+            <img src="./images/avatar.jpg" alt="avatar" width="40">
+            <div>
+                <span>Footer sidebar</span>
+                <span>Frontend developer</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        feather.replace();
+
+        let nav = document.querySelector('.nav');
+
+        let navItems = document.querySelector('.nav_items');
+        let navHeader = document.querySelector('.nav_header');
+        let menuIcon = document.getElementById('menu_icon')
+
+        let navWrapper = document.querySelector('.nav_wrapper');
+
+        let allDropdownLists = document.querySelectorAll('.dropdown_btn');
+
+        allDropdownLists.forEach(item => {
+            item.addEventListener('click', () => {
+                const maxWidthElement = item.nextElementSibling.style.maxHeight;
+                item.nextElementSibling.style.maxHeight = !maxWidthElement ?
+                item.nextElementSibling.scrollHeight + "px" : "";
+                item.classList.toggle('dropdown_show');
+            })
+        })
+
+        menuIcon.addEventListener('click', () => {
+            nav.style.transform = 'translateX(0px)';
+            navWrapper.style.visibility = 'visible';
+            navWrapper.style.opacity = '1';
+        })
+
+        navWrapper.addEventListener('click', () => {
+            nav.style.transform = 'translateX(-250px)';
+            navWrapper.style.visibility = 'hidden';
+            navWrapper.style.opacity = '0';
+        })
+    </script>
+</body>
+</html>
